@@ -14,13 +14,32 @@ class _ClientsListScreenState extends State<ClientsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ElevatedButton(
-        child: const Text(
-          'Add Client',
-        ),
-        onPressed: () {
-          Navigator.pushNamed(context, '/add_client_screen');
-        },
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            child: const Text(
+              'Add Client',
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/add_client_screen');
+            },
+
+          ),
+          ElevatedButton(
+            child: const Text(
+              'Refresh',
+            ),
+            onPressed: () {
+              setState(() {
+
+              });
+            },
+
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
