@@ -1,4 +1,5 @@
-import 'package:flutter_project/core/client_class.dart';
+import 'package:flutter_project/core/client_model.dart';
+import 'package:flutter_project/core/database_helper.dart';
 import 'package:flutter_project/core/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,24 +28,16 @@ class _AddClientScreenState extends State<AddClientScreen> {
         child: const Text(
           'Add Client',
         ),
-        onPressed: () {
-          setState(() {
-            if (nameController.text != null &&
-                emailController.text != null &&
-                phoneController.text != null &&
-                adressController.text != null &&
-                packageController.text != null) {
-              Client newClient = Client(
-                id: clients.length,
-                name: nameController.text,
-                email: emailController.text,
-                phoneNumber: phoneController.text,
-                adress: adressController.text,
-                package: packageController.text,
-              );
-              clients.add(newClient);
-            }
-          });
+        onPressed: () async {
+          await DatabaseHelper.instance.add(
+            Client(
+              name: nameController.text,
+              email: emailController.text,
+              phoneNumber: phoneController.text,
+              adress: adressController.text,
+              package: packageController.text,
+            ),
+          );
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -54,6 +47,13 @@ class _AddClientScreenState extends State<AddClientScreen> {
                   'The client was succesfully created and added to the list.',
                 );
               });
+          setState(() {
+            nameController.clear();
+            emailController.clear();
+            phoneController.clear();
+            adressController.clear();
+            packageController.clear();
+          });
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

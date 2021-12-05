@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import './core/route_generator.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

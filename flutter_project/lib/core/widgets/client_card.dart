@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../client_class.dart';
+import '../client_model.dart';
 
 class ClientCard extends StatelessWidget {
   const ClientCard({required this.client, Key? key}) : super(key: key);

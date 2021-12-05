@@ -1,8 +1,9 @@
+import 'package:flutter_project/core/database_helper.dart';
 import 'package:flutter_project/core/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../core/client_class.dart';
+import '../core/client_model.dart';
 
 class ClientDetailesScreen extends StatefulWidget {
   const ClientDetailesScreen({required this.client, Key? key})
@@ -47,7 +48,7 @@ class _ClientDetailesScreenState extends State<ClientDetailesScreen> {
               ),
               onPressed: () {
                 setState(() {
-                  clients.removeWhere((element) => element == widget.client);
+                  DatabaseHelper.instance.remove(widget.client.id!);
                 });
                 Navigator.pop(context);
                 showDialog(
@@ -66,10 +67,13 @@ class _ClientDetailesScreenState extends State<ClientDetailesScreen> {
                 'Update Client',
               ),
               onPressed: () {
-                widget.client.copyWith(
-                    email: emailController.text,
-                    phoneNumber: phoneController.text,
-                    adress: adressController.text);
+                DatabaseHelper.instance.update(
+                  widget.client.copyWith(
+                      email: emailController.text,
+                      phoneNumber: phoneController.text,
+                      adress: adressController.text),
+                );
+
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
